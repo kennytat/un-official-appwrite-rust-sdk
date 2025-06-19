@@ -1,28 +1,33 @@
 use std::{
-    collections::{BTreeMap, HashMap},
-    fs, thread,
-    time::Duration,
+    // collections::BTreeMap,
+    collections::HashMap,
+    fs, // thread,
+        // time::Duration,
 };
 
-use std::sync::mpsc::{self, Sender};
+// use std::sync::mpsc::{self, Sender};
 
 use reqwest::{
     header::{HeaderMap, HeaderValue, CONTENT_TYPE},
     multipart::{self, Part},
     StatusCode,
 };
-use serde_json::{json, Value};
-use tokio::task;
+use serde_json::Value;
+// use tokio::task;
 // use futures_util::{pin_mut, StreamExt};
 // use std::sync::{Arc, Mutex};
 // use tokio::task;
 use unofficial_appwrite::{
-    client::{ChunkProgress, Client, ClientBuilder},
+    client::{
+        ChunkProgress,
+        // Client,
+        // ClientBuilder
+    },
     error::{AppWriteError, Error},
     id::ID,
-    query::Query as q,
-    query_value::Query,
-    services::server::storage::Storage,
+    // query::Query as q,
+    // query_value::Query,
+    // services::server::storage::Storage,
 };
 use uuid::Uuid;
 
@@ -419,15 +424,15 @@ where
 
 #[tokio::main]
 async fn main() -> Result<(), Error> {
-    let file_path = "Q.mp4";
-    let file_name = "Q.mp4";
+    // let file_path = "Q.mp4";
+    // let file_name = "Q.mp4";
 
-    let client = ClientBuilder::default()
-            .set_endpoint("http://127.0.0.1/v1")?
-            .set_project("676c2b7b000c834e1fce")?
-            .set_key("standard_5d84014ebaf0de52308eff28946a43062921240c10b81c2fd037ab60b02f0257b7f0a53fe94065170fe7c7d0af2d4136d4cbf32a4055baeada3d27f2e323b70aeda87e97f676207cf10cbb18b7a80f8d1103803617454c89138f217dad701bbe9dc6950bc58853fdb2a0b4b67d2a8b8b6b7b9b2e6d9b94e0a2fcfee794688e2e")?
-            //.set_self_signed(false)?
-            .build()?;
+    // let client = ClientBuilder::default()
+    //         .set_endpoint("http://127.0.0.1/v1")?
+    //         .set_project("676c2b7b000c834e1fce")?
+    //         .set_key("standard_5d84014ebaf0de52308eff28946a43062921240c10b81c2fd037ab60b02f0257b7f0a53fe94065170fe7c7d0af2d4136d4cbf32a4055baeada3d27f2e323b70aeda87e97f676207cf10cbb18b7a80f8d1103803617454c89138f217dad701bbe9dc6950bc58853fdb2a0b4b67d2a8b8b6b7b9b2e6d9b94e0a2fcfee794688e2e")?
+    //         //.set_self_signed(false)?
+    //         .build()?;
 
     // let id = ID::unique_old().into();
     // let a = Storage::create_files(

@@ -4,6 +4,7 @@
 
 use std::collections::HashMap;
 
+use reqwest::header::HeaderValue;
 use serde_json::{json, Value};
 
 use crate::{
@@ -621,7 +622,7 @@ impl Account {
     ///* email => string
     ///* password => string
     pub async fn create_email_password_session(
-        client: &Client,
+        client: &mut Client,
         args: HashMap<String, Value>,
     ) -> Result<Session, Error> {
         let api_path = "/account/sessions/email";
@@ -631,7 +632,21 @@ impl Account {
         let res = client
             .call(HttpMethod::POST, api_path, api_headers, &args, None)
             .await?;
+        let cookie_header = res.headers().get("set-cookie");
+        if let Some(set_cookie) = cookie_header {
+            let cookie = set_cookie
+                .to_str()
+                .unwrap_or("")
+                .split(';')
+                .next()
+                .unwrap_or("");
 
+            client
+                .header
+                .insert("Cookie", HeaderValue::from_str(cookie)?);
+        } else {
+            println!("Set-Cookie Header not found");
+        }
         Ok(res.json().await?)
     }
 
